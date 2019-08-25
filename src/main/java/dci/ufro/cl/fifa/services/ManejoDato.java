@@ -1,7 +1,7 @@
 package dci.ufro.cl.fifa.services;
 
 
-import dci.ufro.cl.fifa.model.Jugador;
+import dci.ufro.cl.fifa.model.Registro;
 
 import java.util.List;
 
@@ -11,17 +11,17 @@ public class ManejoDato {
 	 * 
 	 * @param path
 	 */
-	public List<Jugador> leerDatos(String path) {
+	public List<Registro> leerDatos(String path) {
 		// TODO - implement ManejoDato.leerDatos
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param nacionalidad
+	 * @param datos
+	 * @param temperatura
 	 */
-	public List<Jugador> selecNacionalidad(List<Jugador> jugadores, String nacionalidad) {
+	public List<Registro> selTemperatura(List<Registro> datos, double temperatura) {
 		// TODO - implement ManejoDato.selecNacionalidad
 		throw new UnsupportedOperationException();
 	}
@@ -31,7 +31,7 @@ public class ManejoDato {
 	 * @param jugadores
 	 * @param edad
 	 */
-	public List<Jugador> selecEdad(List<Jugador> jugadores, int edad) {
+	public List<Registro> selecEdad(List<Registro> datos, double edad) {
 		// TODO - implement ManejoDato.selecEdad
 		throw new UnsupportedOperationException();
 	}
