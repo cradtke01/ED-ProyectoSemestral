@@ -12,7 +12,7 @@ public class ManejoDato {
 	 * @param path
 	 */
 	public List<Registro> leerDatos(String path) {
-		// TODO - implement ManejoDato.leerDatos
+	
 		throw new UnsupportedOperationException();
 	}
 
@@ -22,57 +22,57 @@ public class ManejoDato {
 	 * @param temperatura
 	 */
 	public List<Registro> selTemperatura(List<Registro> datos, double temperatura) {
-		// TODO - implement ManejoDato.selecNacionalidad
+		
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param edad
+	 * @param datos
+	 * @param humedad
 	 */
-	public List<Registro> selecEdad(List<Registro> datos, double edad) {
-		// TODO - implement ManejoDato.selecEdad
+	public List<Registro> selecHumedad(List<Registro> datos, double humedad) {
+		
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param club
+	 * @param datos
+	 * @param mp25
 	 */
-	public List<Jugador> selecClub(List<Jugador> jugadores, String club) {
-		// TODO - implement ManejoDato.selecClub
+	public List<Registro> selecPm25(List<Registro> datos, double pm25) {
+		
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param ranting
+	 * @param datos
+	 * @param pm10
 	 */
-	public List<Jugador> selecRating(List<Jugador> jugadores, int ranting) {
-		// TODO - implement ManejoDato.selecRating
+	public List<Registro> selecPm10(List<Registro> datos, double pm10) {
+		
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param potencial
+	 * @param datos
+	 * @param dirViento
 	 */
-	public List<Jugador> selecPotencial(List<Jugador> jugadores, int potencial) {
-		// TODO - implement ManejoDato.selecPotencial
+	public List<Registro> selecDirViento(List<Registro> datos, double dirViento) {
+	
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param jugadores
-	 * @param nombre
+	 * @param datos
+	 * @param co2
 	 */
-	public Jugador selecNombre(List<Jugador> jugadores, String nombre) {
-		// TODO - implement ManejoDato.selecNombre
+	public List<Registro> selecCo2(List<Registro> datos, double co2) {
+		
 		throw new UnsupportedOperationException();
 	}
 
