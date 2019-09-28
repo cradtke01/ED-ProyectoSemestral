@@ -1,7 +1,7 @@
-package dci.ufro.cl.fifa.services;
+package dci.ufro.cl.ps.services;
 
 
-import dci.ufro.cl.fifa.model.Registro;
+import dci.ufro.cl.ps.model.Registro;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ManejoDato {
 	 * @param datos
 	 * @param temperatura
 	 */
-	public List<Registro> selTemperatura(List<Registro> datos, double temperatura) {
+	public List<Registro> selecTemperatura(List<Registro> datos, double temperatura) {
 		
 		throw new UnsupportedOperationException();
 	}
@@ -39,7 +39,7 @@ public class ManejoDato {
 	/**
 	 * 
 	 * @param datos
-	 * @param mp25
+	 * @param pm25
 	 */
 	public List<Registro> selecPm25(List<Registro> datos, double pm25) {
 		

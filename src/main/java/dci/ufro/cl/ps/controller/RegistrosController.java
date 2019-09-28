@@ -1,6 +1,6 @@
-package dci.ufro.cl.fifa.controller;
+package dci.ufro.cl.ps.controller;
 
-import dci.ufro.cl.fifa.model.Jugador;
+import dci.ufro.cl.ps.model.Registro;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,9 @@ import java.util.*;
 //direccion que desencadena el controlador
 @Controller
 @RequestMapping("")
-public class JugadoresController {
+public class RegistrosController {
 
-	private Collection<Jugador> jugadores;
+	private Collection<Registro> registros;
 
 	@RequestMapping("")//direccion que desencadena el metodo
 	public String index(Model modelo) {
