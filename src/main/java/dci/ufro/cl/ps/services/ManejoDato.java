@@ -38,6 +38,14 @@ public class ManejoDato {
         }
     }
 
+    public static void selectSector(String sector) {
+        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
+            if (ListaRegistros.getListaRegistros().get(i).getSector() == null || !ListaRegistros.getListaRegistros().get(i).getSector().equalsIgnoreCase(sector)) {
+                ListaRegistros.getListaRegistros().remove(i);
+            }
+        }
+    }
+
     public static void selectPm10(double pm10Piso, double pm10Techo) {
         for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
             if (ListaRegistros.getListaRegistros().get(i).getPm10() == null || ListaRegistros.getListaRegistros().get(i).getPm10() < pm10Piso || ListaRegistros.getListaRegistros().get(i).getPm10() > pm10Techo) {

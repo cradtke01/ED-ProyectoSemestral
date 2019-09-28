@@ -23,7 +23,8 @@ public class RegistrosController {
         // TODO - implement JugadoresController.index
         modelo.addAttribute("titulo", "Ejemplo de index");
 		ManejoDato.leerDatos();
-		ManejoDato.selectTemperatura(0,40);
+		ManejoDato.selectPm10(35,37);
+		ManejoDato.selectSector("universidad");
 		modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
         return "index";
         //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla
