@@ -1,67 +1,87 @@
 package dci.ufro.cl.ps.model;
 
-import java.util.Date;
-
 public class Registro {
 
-    private Date fecha;
-    private double pm10;
-    private double pm25;
-    private double humedad;
-    private double temperatura;
+    private String fecha;
+    private String hora;
+    private String sector;
+    private Double pm10;
+    private Double pm25;
+    private Double humedad;
+    private Double temperatura;
 
-    public Registro(Date fecha, double pm10, double pm25, double humedad, double temperatura) {
+    public Registro(String fecha, String hora, String sector, Double pm10, Double pm25, Double humedad, Double temperatura) {
         this.fecha = fecha;
+        this.hora = hora;
+        this.sector = sector;
         this.pm10 = pm10;
         this.pm25 = pm25;
         this.humedad = humedad;
         this.temperatura = temperatura;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public double getPm10() {
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    public Double getPm10() {
         return pm10;
     }
 
-    public void setPm10(double pm10) {
+    public void setPm10(Double pm10) {
         this.pm10 = pm10;
     }
 
-    public double getPm25() {
+    public Double getPm25() {
         return pm25;
     }
 
-    public void setPm25(double pm25) {
+    public void setPm25(Double pm25) {
         this.pm25 = pm25;
     }
 
-    public double getHumedad() {
+    public Double getHumedad() {
         return humedad;
     }
 
-    public void setHumedad(double humedad) {
+    public void setHumedad(Double humedad) {
         this.humedad = humedad;
     }
 
-    public double getTemperatura() {
+    public Double getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(double temperatura) {
+    public void setTemperatura(Double temperatura) {
         this.temperatura = temperatura;
     }
 
     @Override
     public String toString() {
         return "Registro{" +
-                "fecha=" + fecha +
+                "fecha='" + fecha + '\'' +
+                ", hora='" + hora + '\'' +
+                ", sector='" + sector + '\'' +
                 ", pm10=" + pm10 +
                 ", pm25=" + pm25 +
                 ", humedad=" + humedad +

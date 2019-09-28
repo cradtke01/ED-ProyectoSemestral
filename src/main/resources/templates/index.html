@@ -11,7 +11,25 @@
     <title th:text="${titulo}"> </title>
 </head>
 <body>
-<p class="text-success">Hola Mundo!</p>
-<a class="btn btn-danger btn-sm" href="/proyecto"> Salir </a>
+<table style="width:100%" cellspacing="0" cellpadding="1" border="1">
+    <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Sector</th>
+        <th>PM 10</th>
+        <th>PM 2.5</th>
+        <th>Humedad</th>
+        <th>Temperatura</th>
+    </tr>
+    <tr th:each="r : ${listaRegistros}">
+        <td th:text="${r.getFecha()}"> </td>
+        <td th:text="${r.getHora()}"> </td>
+        <td th:text="${r.getSector()}"> </td>
+        <td th:text="${r.getPm10()}"> </td>
+        <td th:text="${r.getPm25()}"> </td>
+        <td th:text="${r.getHumedad()}"> </td>
+        <td th:text="${r.getTemperatura()}"> </td>
+    </tr>
+</table>
 </body>
 </html>
