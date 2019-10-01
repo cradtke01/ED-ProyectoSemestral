@@ -8,7 +8,7 @@ public class ManejoDato {
     /**
      *
      */
-    public static void leerDatos() {
+    public static void leerDatos(String sectorSelec, String fechaSelec) {
         ListaRegistros.getListaRegistros().clear();
         String datos = FileManager.readFile("src\\main\\resources\\RegistrosAbril.csv");
         String[] registros = datos.split("\n");
@@ -33,16 +33,19 @@ public class ManejoDato {
             if (!valores[6].isBlank()) {
                 temperatura = Double.valueOf(valores[6]);
             }
-            Registro registro = new Registro(fecha, hora, sector, pm10, pm25, humedad, temperatura);
-            ListaRegistros.getListaRegistros().add(registro);
+            if (fecha.equals(fechaSelec)) {
+                Registro registro = new Registro(fecha, hora, sector, pm10, pm25, humedad, temperatura);
+                ListaRegistros.getListaRegistros().add(registro);
+            }
         }
     }
 
     public static void selectSector(String sector) {
         for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getSector() == null || !ListaRegistros.getListaRegistros().get(i).getSector().equalsIgnoreCase(sector)) {
-                ListaRegistros.getListaRegistros().remove(i);
+            if (ListaRegistros.getListaRegistros().get(i).getSector() != null && ListaRegistros.getListaRegistros().get(i).getSector().equalsIgnoreCase(sector)) {
+                continue;
             }
+            ListaRegistros.getListaRegistros().remove(i);
         }
     }
 

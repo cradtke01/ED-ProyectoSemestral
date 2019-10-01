@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
@@ -18,15 +19,25 @@ public class RegistrosController {
 
     private Collection<Registro> registros;
 
-    @RequestMapping("")//direccion que desencadena el metodo
-    public String index(Model modelo) {
+    @RequestMapping("/index")//direccion que desencadena el metodo
+    public String index(Model modelo, @RequestParam(name="dia", required=false) String dia, @RequestParam(name="mes", required=false) String mes, @RequestParam(name="año", required=false) String año) {
+        // TODO - implement JugadoresController.index
+        String fecha = dia+"-"+mes+"-"+año;
+        ManejoDato.leerDatos("", fecha);
+        modelo.addAttribute("titulo", "Ejemplo de index");
+        modelo.addAttribute("fecha", ListaRegistros.getListaRegistros());
+        modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
+        return "index";
+        //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla
+    }
+
+    @RequestMapping("/index2")//direccion que desencadena el metodo
+    public String index2(Model modelo) {
         // TODO - implement JugadoresController.index
         modelo.addAttribute("titulo", "Ejemplo de index");
-		ManejoDato.leerDatos();
-		ManejoDato.selectPm10(35,37);
-		ManejoDato.selectSector("universidad");
-		modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
-        return "index";
+        ManejoDato.leerDatos("", "18-04-2019");
+        modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
+        return "index2";
         //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla
     }
 

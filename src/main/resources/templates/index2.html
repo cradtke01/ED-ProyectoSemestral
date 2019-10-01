@@ -11,11 +11,11 @@
     <title th:text="${titulo}"></title>
 </head>
 <body>
-<form action="/index?fecha=">
+<form action="">
     <input type="text" name="dia" value="" maxlength="2" size="1">-
     <input type="text" name="mes" value="" maxlength="2" size="1">-
     <input type="text" name="año" value="" maxlength="4" size="2">
-    <input type="submit" value="Go">
+    <input type="submit" value="Submit">
 </form>
 <table style="width:100%" cellspacing="0" cellpadding="1" border="1">
     <tr>
@@ -37,10 +37,5 @@
         <td th:text="${r.getTemperatura()}"></td>
     </tr>
 </table>
-<script>
-    function myFunction() {
-        return document.getElementById("dia").value +"-"+ document.getElementById("mes").value+"-"+ document.getElementById("año").value;
-    }
-</script>
 </body>
 </html>
