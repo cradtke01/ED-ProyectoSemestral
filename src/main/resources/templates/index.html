@@ -11,12 +11,15 @@
     <title th:text="${titulo}"></title>
 </head>
 <body>
-<form action="/index?fecha=">
-    <input type="text" name="dia" value="" maxlength="2" size="1">-
-    <input type="text" name="mes" value="" maxlength="2" size="1">-
-    <input type="text" name="año" value="" maxlength="4" size="2">
-    <input type="submit" value="Go">
+<br>
+Ingresar Dia - Mes - Año:
+    <form action="/index?fecha=">
+    <input type="text" name="dia" value="dd" maxlength="2" size="1">-
+    <input type="text" name="mes" value="mm" maxlength="2" size="1">-
+    <input type="text" name="año" value="yyyy" maxlength="4" size="2">
+    <input type="submit" value="Buscar">
 </form>
+<br>
 <table style="width:100%" cellspacing="0" cellpadding="1" border="1">
     <tr>
         <th>Fecha</th>

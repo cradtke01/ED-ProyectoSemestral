@@ -25,19 +25,9 @@ public class RegistrosController {
         String fecha = dia+"-"+mes+"-"+año;
         ManejoDato.leerDatos("", fecha);
         modelo.addAttribute("titulo", "Ejemplo de index");
-        modelo.addAttribute("fecha", ListaRegistros.getListaRegistros());
+        modelo.addAttribute("fecha", fecha);
         modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
         return "index";
-        //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla
-    }
-
-    @RequestMapping("/index2")//direccion que desencadena el metodo
-    public String index2(Model modelo) {
-        // TODO - implement JugadoresController.index
-        modelo.addAttribute("titulo", "Ejemplo de index");
-        ManejoDato.leerDatos("", "18-04-2019");
-        modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
-        return "index2";
         //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla
     }
 
