@@ -13,10 +13,14 @@
 <body>
 <br>
 Ingresar Dia - Mes - Año:
-    <form action="/index?fecha=">
-    <input type="text" name="dia" value="dd" maxlength="2" size="1">-
-    <input type="text" name="mes" value="mm" maxlength="2" size="1">-
-    <input type="text" name="año" value="yyyy" maxlength="4" size="2">
+<form action="/index">
+    <input type="text" name="dia" th:value="${dia}" maxlength="2" size="1">-
+    <input type="text" name="mes" th:value="${mes}" maxlength="2" size="1">-
+    <input type="text" name="ano" th:value="${ano}" maxlength="4" size="2">
+    <div class="slidecontainer">
+        <input type="range" min="0" max="23" th:value="${hora}" class="slider" id="myRange" name="hora" style="width:33%">
+        <p>Hora: <span id="demo"></span></p>
+    </div>
     <input type="submit" value="Buscar">
 </form>
 <br>
@@ -41,8 +45,12 @@ Ingresar Dia - Mes - Año:
     </tr>
 </table>
 <script>
-    function myFunction() {
-        return document.getElementById("dia").value +"-"+ document.getElementById("mes").value+"-"+ document.getElementById("año").value;
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = (slider.value) + ":00";
+
+    slider.oninput = function () {
+        output.innerHTML = (this.value) + ":00";
     }
 </script>
 </body>

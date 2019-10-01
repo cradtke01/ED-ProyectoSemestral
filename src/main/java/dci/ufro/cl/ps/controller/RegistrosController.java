@@ -20,12 +20,15 @@ public class RegistrosController {
     private Collection<Registro> registros;
 
     @RequestMapping("/index")//direccion que desencadena el metodo
-    public String index(Model modelo, @RequestParam(name="dia", required=false) String dia, @RequestParam(name="mes", required=false) String mes, @RequestParam(name="año", required=false) String año) {
+    public String index(Model modelo, @RequestParam(name="dia", required=false) String dia, @RequestParam(name="mes", required=false) String mes, @RequestParam(name="ano", required=false) String ano, @RequestParam(name="hora", required=false) String hora) {
         // TODO - implement JugadoresController.index
-        String fecha = dia+"-"+mes+"-"+año;
-        ManejoDato.leerDatos("", fecha);
+        String fecha = dia+"-"+mes+"-"+ano;
+        ManejoDato.leerDatos("", fecha,hora);
         modelo.addAttribute("titulo", "Ejemplo de index");
-        modelo.addAttribute("fecha", fecha);
+        modelo.addAttribute("dia", dia);
+        modelo.addAttribute("mes", mes);
+        modelo.addAttribute("ano", ano);
+        modelo.addAttribute("hora", hora);
         modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
         return "index";
         //para lanzar una pagina se agrega la pagina en templates y se escribe la direccion donde enviarla

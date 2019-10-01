@@ -8,11 +8,11 @@ public class ManejoDato {
     /**
      *
      */
-    public static void leerDatos(String sectorSelec, String fechaSelec) {
+    public static void leerDatos(String sectorSelec, String fechaSelec, String horaSelec) {
         ListaRegistros.getListaRegistros().clear();
         String datos = FileManager.readFile("src\\main\\resources\\RegistrosAbril.csv");
         String[] registros = datos.split("\n");
-        for (int i = 1; i < registros.length; i++) {
+        for (int i = 0; i < registros.length; i++) {
             String[] valores = registros[i].split(",");
             String fecha = valores[0];
             String hora = valores[1];
@@ -33,7 +33,7 @@ public class ManejoDato {
             if (!valores[6].isBlank()) {
                 temperatura = Double.valueOf(valores[6]);
             }
-            if (fecha.equals(fechaSelec)) {
+            if (fecha.equals(fechaSelec) && hora.split(":")[0].equals(horaSelec)) {
                 Registro registro = new Registro(fecha, hora, sector, pm10, pm25, humedad, temperatura);
                 ListaRegistros.getListaRegistros().add(registro);
             }
