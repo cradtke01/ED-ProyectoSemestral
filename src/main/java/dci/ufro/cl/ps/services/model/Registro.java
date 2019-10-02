@@ -1,4 +1,4 @@
-package dci.ufro.cl.ps.model;
+package dci.ufro.cl.ps.services.model;
 
 public class Registro {
 

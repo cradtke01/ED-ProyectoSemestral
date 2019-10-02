@@ -1,8 +1,8 @@
-package dci.ufro.cl.ps.controller;
+package dci.ufro.cl.ps.services.controller;
 
-import dci.ufro.cl.ps.model.ListaRegistros;
-import dci.ufro.cl.ps.model.Registro;
-import dci.ufro.cl.ps.services.ManejoDato;
+import dci.ufro.cl.ps.services.model.ListaRegistros;
+import dci.ufro.cl.ps.services.model.Registro;
+import dci.ufro.cl.ps.services.services.ManejoDato;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

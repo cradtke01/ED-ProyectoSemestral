@@ -1,4 +1,4 @@
-package dci.ufro.cl.ps.controller;
+package dci.ufro.cl.ps.services.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

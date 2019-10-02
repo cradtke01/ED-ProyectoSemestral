@@ -1,7 +1,7 @@
-package dci.ufro.cl.ps.services;
+package dci.ufro.cl.ps.services.services;
 
-import dci.ufro.cl.ps.model.ListaRegistros;
-import dci.ufro.cl.ps.model.Registro;
+import dci.ufro.cl.ps.services.model.ListaRegistros;
+import dci.ufro.cl.ps.services.model.Registro;
 
 public class ManejoDato {
 
