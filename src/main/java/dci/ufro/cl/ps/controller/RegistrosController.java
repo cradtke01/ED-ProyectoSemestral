@@ -1,8 +1,8 @@
-package dci.ufro.cl.ps.services.controller;
+package dci.ufro.cl.ps.controller;
 
-import dci.ufro.cl.ps.services.model.ListaRegistros;
-import dci.ufro.cl.ps.services.model.Registro;
-import dci.ufro.cl.ps.services.services.ManejoDato;
+import dci.ufro.cl.ps.model.ListaRegistros;
+import dci.ufro.cl.ps.model.Registro;
+import dci.ufro.cl.ps.services.ManejoDato;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +22,7 @@ public class RegistrosController {
     @RequestMapping("/index")//direccion que desencadena el metodo
     public String index(Model modelo, @RequestParam(name="dia", required=false) String dia, @RequestParam(name="mes", required=false) String mes, @RequestParam(name="ano", required=false) String ano, @RequestParam(name="hora", required=false) String hora) {
         // TODO - implement JugadoresController.index
-        String fecha = dia+"-"+mes+"-"+ano;
-        ManejoDato.leerDatos("", fecha,hora);
-        modelo.addAttribute("titulo", "Ejemplo de index");
+        ManejoDato.leerDatos("", dia+"-"+mes+"-"+ano,hora);
         modelo.addAttribute("dia", dia);
         modelo.addAttribute("mes", mes);
         modelo.addAttribute("ano", ano);

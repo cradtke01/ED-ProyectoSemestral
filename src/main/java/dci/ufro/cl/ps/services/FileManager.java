@@ -1,4 +1,4 @@
-package dci.ufro.cl.ps.services.services;
+package dci.ufro.cl.ps.services;
 
 import java.io.File;
 import java.nio.file.Files;

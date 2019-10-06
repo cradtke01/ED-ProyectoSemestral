@@ -1,4 +1,4 @@
-package dci.ufro.cl.ps.services.model;
+package dci.ufro.cl.ps.model;
 
 import java.util.ArrayList;
 
