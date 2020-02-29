@@ -10,7 +10,7 @@ public class ManejoDato {
      */
     public static void leerDatos(String sectorSelec, String fechaSelec, String horaSelec) {
         ListaRegistros.getListaRegistros().clear();
-        String datos = FileManager.readFile("src\\main\\resources\\RegistrosAbril.csv");
+        String datos = FileManager.readFile("src\\main\\resources\\Registros.csv");
         String[] registros = datos.split("\n");
         for (int i = 0; i < registros.length; i++) {
             String[] valores = registros[i].split(",");
@@ -19,19 +19,27 @@ public class ManejoDato {
             String sector = valores[2];
             Double pm10 = null;
             if (!valores[3].isBlank()) {
-                pm10 = Double.valueOf(valores[3]);
+                pm10 = Double.valueOf(valores[3].replaceFirst("\\.", "_").replaceAll("\\.", "").replace("_", "."));
             }
             Double pm25 = null;
             if (!valores[4].isBlank()) {
-                pm25 = Double.valueOf(valores[4]);
+                pm25 = Double.valueOf(valores[4].replaceFirst("\\.", "_").replaceAll("\\.", "").replace("_", "."));
             }
             Double humedad = null;
-            if (!valores[5].isBlank()) {
-                humedad = Double.valueOf(valores[5]);
+            try {
+                if (!valores[5].isBlank()) {
+                    humedad = Double.valueOf(valores[5].replaceFirst("\\.", "_").replaceAll("\\.", "").replace("_", "."));
+                }
+            } catch (Exception e) {
+
             }
             Double temperatura = null;
-            if (!valores[6].isBlank()) {
-                temperatura = Double.valueOf(valores[6]);
+            try {
+                if (!valores[6].isBlank()) {
+                    temperatura = Double.valueOf(valores[6].replaceFirst("\\.", "_").replaceAll("\\.", "").replace("_", "."));
+                }
+            } catch (Exception e) {
+
             }
             if (fecha.equals(fechaSelec) && hora.split(":")[0].equals(horaSelec)) {
                 Registro registro = new Registro(fecha, hora, sector, pm10, pm25, humedad, temperatura);
