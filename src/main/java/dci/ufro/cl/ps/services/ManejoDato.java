@@ -79,10 +79,10 @@ public class ManejoDato {
             }
             for (int i = 0; i < valoresPromedio.length; i++) {
                 try {
-                    if (counters[i] == 0) {
-                        counters[i] = 1;
-                    }
                     valoresPromedio[i] /= counters[i];
+                    if (counters[i] == 0) {
+                        valoresPromedio[i] = null;
+                    }
                 } catch (Exception e) {
 
                 }
