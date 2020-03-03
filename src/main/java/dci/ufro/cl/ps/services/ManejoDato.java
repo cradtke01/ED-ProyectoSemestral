@@ -11,7 +11,7 @@ public class ManejoDato {
     /**
      *
      */
-    public static void leerDatos(String sectorSelec, String fechaSelec, String horaSelec) {
+    public static void resumirDatos(String sectorSelec, String fechaSelec, String horaSelec) {
         HashMap<String, ArrayList<Double[]>> resumenRegistros = new HashMap<>();
         ArrayList<Registro> nuevaListaRegistros = new ArrayList<>();
         ListaRegistros.getListaRegistros().clear();
@@ -52,25 +52,12 @@ public class ManejoDato {
             Double[] valoresPromedio = {0.0, 0.0, 0.0, 0.0};
             int[] counters = {0, 0, 0, 0};
             for (int i = 0; i < resumenRegistros.get(key).size(); i++) {
-                try {
-                    valoresPromedio[0] += resumenRegistros.get(key).get(i)[0];
-                    counters[0]++;
-                } catch (Exception ignored) {
-                }
-                try {
-                    valoresPromedio[1] += resumenRegistros.get(key).get(i)[1];
-                    counters[1]++;
-                } catch (Exception ignored) {
-                }
-                try {
-                    valoresPromedio[2] += resumenRegistros.get(key).get(i)[2];
-                    counters[2]++;
-                } catch (Exception ignored) {
-                }
-                try {
-                    valoresPromedio[3] += resumenRegistros.get(key).get(i)[3];
-                    counters[3]++;
-                } catch (Exception ignored) {
+                for (int j = 0; j < resumenRegistros.get(key).get(i).length; j++) {
+                    try {
+                        valoresPromedio[j] += resumenRegistros.get(key).get(i)[j];
+                        counters[j]++;
+                    } catch (Exception ignored) {
+                    }
                 }
             }
             for (int i = 0; i < valoresPromedio.length; i++) {
@@ -80,7 +67,6 @@ public class ManejoDato {
                         valoresPromedio[i] = null;
                     }
                 } catch (Exception ignored) {
-
                 }
             }
             if (key.split("_")[0].equals(fechaSelec) && key.split("_")[1].equals(horaSelec)) {
