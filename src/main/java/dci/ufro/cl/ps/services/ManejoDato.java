@@ -17,8 +17,8 @@ public class ManejoDato {
         ListaRegistros.getListaRegistros().clear();
         String datos = FileManager.readFile("src\\main\\resources\\Registros.csv");
         String[] registros = datos.split("\n");
-        for (int i = 0; i < registros.length; i++) {
-            String[] valores = registros[i].split(",");
+        for (String registro : registros) {
+            String[] valores = registro.split(",");
             String fecha = valores[0];
             String hora = valores[1];
             String sector = valores[2];
@@ -26,10 +26,6 @@ public class ManejoDato {
             String pm2_5 = valores[4];
             String humedad = valores[5];
             String temperatura = valores[6];
-
-            /**
-             * NEED WORKAROUND FOR HASHMAP TO ACCEPT OBJECTS EQUAL AS KEY
-             */
 
             Double[] v = new Double[4];
             if (!pm10.isBlank()) {
@@ -59,22 +55,22 @@ public class ManejoDato {
                 try {
                     valoresPromedio[0] += resumenRegistros.get(key).get(i)[0];
                     counters[0]++;
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 try {
                     valoresPromedio[1] += resumenRegistros.get(key).get(i)[1];
                     counters[1]++;
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 try {
                     valoresPromedio[2] += resumenRegistros.get(key).get(i)[2];
                     counters[2]++;
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 try {
                     valoresPromedio[3] += resumenRegistros.get(key).get(i)[3];
                     counters[3]++;
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             for (int i = 0; i < valoresPromedio.length; i++) {
@@ -83,7 +79,7 @@ public class ManejoDato {
                     if (counters[i] == 0) {
                         valoresPromedio[i] = null;
                     }
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }
