@@ -19,33 +19,35 @@ public class ManejoDato {
         String[] registros = datos.split("\n");
         for (String registro : registros) {
             String[] valores = registro.split(",");
-            String fecha = valores[0];
-            String hora = valores[1];
-            String sector = valores[2];
-            String pm10 = valores[3];
-            String pm2_5 = valores[4];
-            String humedad = valores[5];
-            String temperatura = valores[6];
+            if (valores[0].equals(fechaSelec) && valores[1].equals(horaSelec)) {
+                String fecha = valores[0];
+                String hora = valores[1];
+                String sector = valores[2];
+                String pm10 = valores[3];
+                String pm2_5 = valores[4];
+                String humedad = valores[5];
+                String temperatura = valores[6];
 
-            Double[] v = new Double[4];
-            if (!pm10.isBlank()) {
-                v[0] = Double.valueOf(pm10);
-            }
-            if (!pm2_5.isBlank()) {
-                v[1] = Double.valueOf(pm2_5);
-            }
-            if (!humedad.isBlank()) {
-                v[2] = Double.valueOf(humedad);
-            }
-            if (!temperatura.isBlank()) {
-                v[3] = Double.valueOf(temperatura);
-            }
-            ArrayList<Double[]> dataToMerge = new ArrayList<>();
-            dataToMerge.add(v);
-            if (!resumenRegistros.containsKey(fecha + "_" + hora + "_" + sector)) {
-                resumenRegistros.put(fecha + "_" + hora + "_" + sector, dataToMerge);
-            } else {
-                resumenRegistros.get(fecha + "_" + hora + "_" + sector).add(v);
+                Double[] v = new Double[4];
+                if (!pm10.isBlank()) {
+                    v[0] = Double.valueOf(pm10);
+                }
+                if (!pm2_5.isBlank()) {
+                    v[1] = Double.valueOf(pm2_5);
+                }
+                if (!humedad.isBlank()) {
+                    v[2] = Double.valueOf(humedad);
+                }
+                if (!temperatura.isBlank()) {
+                    v[3] = Double.valueOf(temperatura);
+                }
+                ArrayList<Double[]> dataToMerge = new ArrayList<>();
+                dataToMerge.add(v);
+                if (!resumenRegistros.containsKey(fecha + "_" + hora + "_" + sector)) {
+                    resumenRegistros.put(fecha + "_" + hora + "_" + sector, dataToMerge);
+                } else {
+                    resumenRegistros.get(fecha + "_" + hora + "_" + sector).add(v);
+                }
             }
         }
         for (String key : resumenRegistros.keySet()) {
@@ -69,9 +71,7 @@ public class ManejoDato {
                 } catch (Exception ignored) {
                 }
             }
-            if (key.split("_")[0].equals(fechaSelec) && key.split("_")[1].equals(horaSelec)) {
-                nuevaListaRegistros.add(new Registro(key.split("_")[0], key.split("_")[1], key.split("_")[2], valoresPromedio[0], valoresPromedio[1], valoresPromedio[2], valoresPromedio[3]));
-            }
+            nuevaListaRegistros.add(new Registro(key.split("_")[0], key.split("_")[1], key.split("_")[2], valoresPromedio[0], valoresPromedio[1], valoresPromedio[2], valoresPromedio[3]));
         }
         ListaRegistros.setListaRegistros(nuevaListaRegistros);
     }
