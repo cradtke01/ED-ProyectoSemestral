@@ -11,11 +11,15 @@ public class ManejoDato {
     /**
      *
      */
-    public static void resumirDatos(String sectorSelec, String fechaSelec, String horaSelec) {
+    public static void resumirDatos(String fechaSelec, String horaSelec) {
+        try {
+            fechaSelec = fechaSelec.split("-")[2]+"-"+fechaSelec.split("-")[1]+"-"+fechaSelec.split("-")[0];
+        } catch (Exception ignored) {
+        }
+        ListaRegistros.getListaRegistros().clear();
         HashMap<String, ArrayList<Double[]>> resumenRegistros = new HashMap<>();
         ArrayList<Registro> nuevaListaRegistros = new ArrayList<>();
-        ListaRegistros.getListaRegistros().clear();
-        String datos = FileManager.readFile("src\\main\\resources\\Registros.csv");
+        String datos = FileManager.readFile("src\\main\\resources\\data\\Registros.csv");
         String[] registros = datos.split("\n");
         for (String registro : registros) {
             String[] valores = registro.split(",");

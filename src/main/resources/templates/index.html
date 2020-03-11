@@ -1,35 +1,39 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
 <head>
-    <header>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </header>
-    <meta charset="UTF-8">
     <title th:text="ContaminacionTemuco"></title>
+    <link type="text/css" href="css/index.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+    <!-- Create an element where the map will take place -->
 </head>
+
 <body>
-<br>
-<br>
-<form action="/index">Ingresar Dia - Mes - Año:
-    <input type="text" name="dia" th:value="${dia}" maxlength="2" size="1">-
-    <input type="text" name="mes" th:value="${mes}" maxlength="2" size="1">-
-    <input type="text" name="ano" th:value="${ano}" maxlength="4" size="2">
-    <br>
-    <br>
-    <div class="slidecontainer">
-        <input type="range" min="0" max="23" th:value="${hora}" class="slider" id="myRange" name="hora"
-               style="width:33%"> Hora: <span id="demo"></span>
-    </div>
-    <br>
-    <br>
+<h1>Contaminacion en Temuco</h1>
+<hr>
+<form action="/index">
+    <p>Ingresar fecha:</p>
+    <input maxlength="2" name="fecha" size="1" th:value="${fecha}" type="date" placeholder="Fecha">
+    <p>Ingresar hora:</p>
+    <input class="slider" id="horaID" max="23" min="0" name="hora" th:value="${hora}"
+    type="range">
+    <span id="horaSeleccionada"></span>:00
+    <p>Comienza tu busqueda:</p>
     <input type="submit" value="Buscar">
 </form>
-<br>
-<br>
-<table style="width:100%" cellspacing="0" cellpadding="1" border="1">
+<hr>
+<div>
+    <svg id="my_dataviz" width="800" height="600"></svg>
+</div>
+<hr>
+<table border="1" cellpadding="1" cellspacing="0">
+    <thead>
     <tr>
         <th>Fecha</th>
         <th>Hora</th>
@@ -39,23 +43,74 @@
         <th>Humedad</th>
         <th>Temperatura</th>
     </tr>
-    <tr th:each="r : ${listaRegistros}">
-        <td th:text="${r.getFecha()}"></td>
-        <td th:text="${r.getHora()}"></td>
-        <td th:text="${r.getSector()}"></td>
-        <td th:text="${r.getPm10()}"></td>
-        <td th:text="${r.getPm25()}"></td>
-        <td th:text="${r.getHumedad()}"></td>
-        <td th:text="${r.getTemperatura()}"></td>
+    </thead>
+    <tbody>
+    <tr th:each="registro : ${listaRegistros}">
+        <td th:text="${registro.getFecha()}"></td>
+        <td th:text="${registro.getHora()}"></td>
+        <td th:text="${registro.getSector()}"></td>
+        <td th:text="${registro.getPm10()}"></td>
+        <td th:text="${registro.getPm25()}"></td>
+        <td th:text="${registro.getHumedad()}"></td>
+        <td th:text="${registro.getTemperatura()}"></td>
     </tr>
+    </tbody>
 </table>
+
+
 <script>
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    output.innerHTML = (slider.value) + ":00";
+    // The svg
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    // Map and projection
+    var path = d3.geoPath();
+    var projection = d3.geoMercator()
+        .scale(110000)
+        .center([-72.5904,-38.7359])
+        .translate([width / 2, height / 2]);
+
+    // Data and color scale
+    var data = d3.map();
+    var colorScale = d3.scaleThreshold()
+        .domain([10, 20, 300, 400, 500, 600])
+        .range(d3.schemeBlues[7]);
+
+    // Load external data and boot
+    d3.queue()
+        .defer(d3.json, "../data/map.geojson")
+        .defer(d3.csv, "../data/Registrostest.csv", function(d) { data.set(d.code, +d.pop); })
+        .await(ready);
+
+    function ready(error, topo) {
+
+        // Draw the map
+        svg.append("g")
+            .selectAll("path")
+            .data(topo.features)
+            .enter()
+            .append("path")
+            // draw each country
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            // set the color of each country
+            .attr("fill", function (d) {
+                d.total = data.get(d.id) || 0;
+                return colorScale(d.total);
+            });
+    }
+
+
+</script>
+<script>
+    var slider = document.getElementById("horaID");
+    var output = document.getElementById("horaSeleccionada");
+    output.innerHTML = (slider.value);
 
     slider.oninput = function () {
-        output.innerHTML = (this.value) + ":00";
+        output.innerHTML = (this.value);
     }
 </script>
 </body>
