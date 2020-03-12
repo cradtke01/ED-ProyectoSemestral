@@ -25,7 +25,6 @@ public class RegistrosController {
         modelo.addAttribute("fecha", fecha);
         modelo.addAttribute("hora", hora);
         modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
-        modelo.addAttribute("registrosR", FileManager.readFile("src\\main\\resources\\static\\RegistrosR.csv"));
         return "index";
     }
 }
