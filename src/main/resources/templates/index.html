@@ -3,10 +3,11 @@
 
 <head>
     <title th:text="ContaminacionTemuco"></title>
-    <link type="text/css" href="css/index.css" rel="stylesheet" />
+    <link type="text/css" href="css/index.css" rel="stylesheet"/>
+    <link type="text/xml" href="RegistrosR.csv">
+    <link type="text/plain" href="map.geojson">
     <meta charset="UTF-8">
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
@@ -22,14 +23,14 @@
     <input maxlength="2" name="fecha" size="1" th:value="${fecha}" type="date" placeholder="Fecha">
     <p>Ingresar hora:</p>
     <input class="slider" id="horaID" max="23" min="0" name="hora" th:value="${hora}"
-    type="range">
+           type="range">
     <span id="horaSeleccionada"></span>:00
     <p>Comienza tu busqueda:</p>
     <input type="submit" value="Buscar">
 </form>
 <hr>
 <div>
-    <svg id="my_dataviz" width="800" height="600"></svg>
+    <svg id="my_dataviz" width="800" height="250"></svg>
 </div>
 <hr>
 <table border="1" cellpadding="1" cellspacing="0">
@@ -59,47 +60,55 @@
 
 
 <script>
-    // The svg
-    var svg = d3.select("svg"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
 
-    // Map and projection
-    var path = d3.geoPath();
-    var projection = d3.geoMercator()
-        .scale(110000)
-        .center([-72.5904,-38.7359])
-        .translate([width / 2, height / 2]);
+    window.onload = function () {
 
-    // Data and color scale
-    var data = d3.map();
-    var colorScale = d3.scaleThreshold()
-        .domain([10, 20, 300, 400, 500, 600])
-        .range(d3.schemeBlues[7]);
 
-    // Load external data and boot
-    d3.queue()
-        .defer(d3.json, "../data/map.geojson")
-        .defer(d3.csv, "../data/Registrostest.csv", function(d) { data.set(d.code, +d.pop); })
-        .await(ready);
+        // The svg
+        var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
 
-    function ready(error, topo) {
+        // Map and projection
+        var path = d3.geoPath();
+        var projection = d3.geoMercator()
+            .scale(110000)
+            .center([-72.5904, -38.7359])
+            .translate([width / 2, height / 2]);
 
-        // Draw the map
-        svg.append("g")
-            .selectAll("path")
-            .data(topo.features)
-            .enter()
-            .append("path")
-            // draw each country
-            .attr("d", d3.geoPath()
-                .projection(projection)
-            )
-            // set the color of each country
-            .attr("fill", function (d) {
-                d.total = data.get(d.id) || 0;
-                return colorScale(d.total);
-            });
+        // Data and color scale
+        var data = d3.map();
+        var colorScale = d3.scaleThreshold()
+            .domain([0, 20, 40, 60, 80, 100, 120, 140])
+            .range(d3.schemeReds[9]);
+
+        // Load external data and boot
+        d3.queue()
+            .defer(d3.json, "map.geojson")
+            .defer(d3.csv, "RegistrosR.csv", function (d) {
+                data.set(d.code, +d.pop);
+            })
+            .await(ready);
+
+
+        function ready(error, topo) {
+
+            // Draw the map
+            svg.append("g")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                // draw each country
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                // set the color of each country
+                .attr("fill", function (d) {
+                    d.total = data.get(d.id) || 0;
+                    return colorScale(d.total);
+                });
+        }
     }
 
 

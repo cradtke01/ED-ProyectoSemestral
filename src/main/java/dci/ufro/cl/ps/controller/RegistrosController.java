@@ -2,6 +2,7 @@ package dci.ufro.cl.ps.controller;
 
 import dci.ufro.cl.ps.model.ListaRegistros;
 import dci.ufro.cl.ps.model.Registro;
+import dci.ufro.cl.ps.services.FileManager;
 import dci.ufro.cl.ps.services.ManejoDato;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ public class RegistrosController {
         modelo.addAttribute("fecha", fecha);
         modelo.addAttribute("hora", hora);
         modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());
+        modelo.addAttribute("registrosR", FileManager.readFile("src\\main\\resources\\static\\RegistrosR.csv"));
         return "index";
     }
 }

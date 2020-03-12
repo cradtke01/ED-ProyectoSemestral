@@ -13,12 +13,13 @@ public class ManejoDato {
      */
     public static void resumirDatos(String fechaSelec, String horaSelec) {
         try {
-            fechaSelec = fechaSelec.split("-")[2]+"-"+fechaSelec.split("-")[1]+"-"+fechaSelec.split("-")[0];
+            fechaSelec = fechaSelec.split("-")[2] + "-" + fechaSelec.split("-")[1] + "-" + fechaSelec.split("-")[0];
         } catch (Exception ignored) {
         }
         ListaRegistros.getListaRegistros().clear();
         HashMap<String, ArrayList<Double[]>> resumenRegistros = new HashMap<>();
         ArrayList<Registro> nuevaListaRegistros = new ArrayList<>();
+
         String datos = FileManager.readFile("src\\main\\resources\\data\\Registros.csv");
         String[] registros = datos.split("\n");
         for (String registro : registros) {
@@ -78,47 +79,13 @@ public class ManejoDato {
             nuevaListaRegistros.add(new Registro(key.split("_")[0], key.split("_")[1], key.split("_")[2], valoresPromedio[0], valoresPromedio[1], valoresPromedio[2], valoresPromedio[3]));
         }
         ListaRegistros.setListaRegistros(nuevaListaRegistros);
+        csvResumen(nuevaListaRegistros);
     }
 
-    public static void selectSector(String sector) {
-        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getSector() != null && ListaRegistros.getListaRegistros().get(i).getSector().equalsIgnoreCase(sector)) {
-                continue;
-            }
-            ListaRegistros.getListaRegistros().remove(i);
+    public static void csvResumen(ArrayList<Registro> registros) {
+        FileManager.writeFile("src\\main\\resources\\static\\RegistrosR.csv", "fecha,hora,code,pop,a,b,c\n");
+        for (Registro r : registros) {
+            FileManager.writeFile("src\\main\\resources\\static\\RegistrosR.csv", FileManager.readFile("src\\main\\resources\\static\\RegistrosR.csv")+r.getFecha()+","+r.getHora()+","+r.getSector()+","+r.getPm10()+","+r.getPm25()+","+r.getHumedad()+","+r.getTemperatura()+"\n");
         }
     }
-
-    public static void selectPm10(double pm10Piso, double pm10Techo) {
-        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getPm10() == null || ListaRegistros.getListaRegistros().get(i).getPm10() < pm10Piso || ListaRegistros.getListaRegistros().get(i).getPm10() > pm10Techo) {
-                ListaRegistros.getListaRegistros().remove(i);
-            }
-        }
-    }
-
-    public static void selectPm25(double pm25Piso, double pm25Techo) {
-        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getPm25() == null || ListaRegistros.getListaRegistros().get(i).getPm25() < pm25Piso || ListaRegistros.getListaRegistros().get(i).getPm25() > pm25Techo) {
-                ListaRegistros.getListaRegistros().remove(i);
-            }
-        }
-    }
-
-    public static void selectHumedad(double humedadPiso, double humedadTecho) {
-        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getHumedad() == null || ListaRegistros.getListaRegistros().get(i).getHumedad() < humedadPiso || ListaRegistros.getListaRegistros().get(i).getHumedad() > humedadTecho) {
-                ListaRegistros.getListaRegistros().remove(i);
-            }
-        }
-    }
-
-    public static void selectTemperatura(double temperaturaPiso, double temperaturaTecho) {
-        for (int i = ListaRegistros.getListaRegistros().size() - 1; i >= 0; i--) {
-            if (ListaRegistros.getListaRegistros().get(i).getTemperatura() == null || ListaRegistros.getListaRegistros().get(i).getTemperatura() < temperaturaPiso || ListaRegistros.getListaRegistros().get(i).getTemperatura() > temperaturaTecho) {
-                ListaRegistros.getListaRegistros().remove(i);
-            }
-        }
-    }
-
 }
