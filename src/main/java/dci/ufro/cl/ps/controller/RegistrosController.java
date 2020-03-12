@@ -2,8 +2,7 @@ package dci.ufro.cl.ps.controller;
 
 import dci.ufro.cl.ps.model.ListaRegistros;
 import dci.ufro.cl.ps.model.Registro;
-import dci.ufro.cl.ps.services.FileManager;
-import dci.ufro.cl.ps.services.ManejoDato;
+import dci.ufro.cl.ps.services.RegistroManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ public class RegistrosController {
 
     @RequestMapping("/index")//direccion que desencadena el metodo
     public String index(Model modelo, @RequestParam(name = "fecha", required = false) String fecha, @RequestParam(name = "hora", required = false) String hora) {
-        ManejoDato.resumirDatos(fecha, hora);
+        RegistroManager.resumirDatos(fecha, hora);
         modelo.addAttribute("fecha", fecha);
         modelo.addAttribute("hora", hora);
         modelo.addAttribute("listaRegistros", ListaRegistros.getListaRegistros());

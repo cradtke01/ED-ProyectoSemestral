@@ -1,11 +1,18 @@
 body {
     background-color: black;
     color: white;
+    font-family: Arial;
+    font-size: large;
+    border: 1px solid black;
+    margin-top: 25px;
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
-@media screen and (prefers-color-scheme: light) {
-    body {
-        background-color: white;
-        color: black;
-    }
+.inline-block-child {
+    display: inline-block;
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-left: 25px;
+    margin-bottom: 25px;
 }

@@ -3,6 +3,7 @@
 
 <head>
     <title th:text="ContaminacionTemuco"></title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link type="text/css" href="css/index.css" rel="stylesheet"/>
     <link type="text/xml" href="RegistrosR.csv">
     <link type="text/plain" href="map.geojson">
@@ -18,26 +19,39 @@
 <body>
 <h1>Contaminacion en Temuco</h1>
 <hr>
+
+<div class='parent'>
+    <div class='child inline-block-child'>
+        <p>Ingresa una fecha:</p>
+    </div>
+    <div class='child inline-block-child'>
+        <p>Ingresa una hora:</p>
+
+    </div>
+    <div class='child inline-block-child'>
+        <p>Comienza tu busqueda:</p>
+    </div>
+</div>
 <form action="/index">
-    <p>Ingresar fecha:</p>
-    <input maxlength="2" name="fecha" size="1" th:value="${fecha}" type="date" placeholder="Fecha">
-    <p>Ingresar hora:</p>
-    <input class="slider" id="horaID" max="23" min="0" name="hora" th:value="${hora}"
-           type="range">
-    <span id="horaSeleccionada"></span>:00
-    <p>Comienza tu busqueda:</p>
-    <input type="submit" value="Buscar">
+    <div class='parent'>
+        <div class='child inline-block-child'>
+            <input maxlength="2" name="fecha" placeholder="Fecha" size="1" th:value="${fecha}" type="date">
+        </div>
+        <div class='child inline-block-child'>
+            <input class="slider" id="horaID" max="23" min="0" name="hora" th:value="${hora}"
+                   type="range"> <span id="horaSeleccionada"></span>:00
+        </div>
+        <div class='child inline-block-child'><input type="submit" value="Buscar">
+        </div>
+    </div>
 </form>
 <hr>
-<div>
-    <svg id="my_dataviz" width="800" height="250"></svg>
-</div>
+
+<svg height="250" id="my_dataviz" style="background-color: white" width="800"></svg>
 <hr>
-<table border="1" cellpadding="1" cellspacing="0">
+<table border="1" cellpadding="1" cellspacing="0" width="800">
     <thead>
     <tr>
-        <th>Fecha</th>
-        <th>Hora</th>
         <th>Sector</th>
         <th>PM 10</th>
         <th>PM 2.5</th>
@@ -47,8 +61,6 @@
     </thead>
     <tbody>
     <tr th:each="registro : ${listaRegistros}">
-        <td th:text="${registro.getFecha()}"></td>
-        <td th:text="${registro.getHora()}"></td>
         <td th:text="${registro.getSector()}"></td>
         <td th:text="${registro.getPm10()}"></td>
         <td th:text="${registro.getPm25()}"></td>
@@ -57,7 +69,6 @@
     </tr>
     </tbody>
 </table>
-
 
 <script>
 

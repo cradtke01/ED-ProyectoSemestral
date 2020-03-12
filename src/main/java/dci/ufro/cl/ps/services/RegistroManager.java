@@ -3,10 +3,11 @@ package dci.ufro.cl.ps.services;
 import dci.ufro.cl.ps.model.ListaRegistros;
 import dci.ufro.cl.ps.model.Registro;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ManejoDato {
+public class RegistroManager {
 
     /**
      *
@@ -70,6 +71,8 @@ public class ManejoDato {
             for (int i = 0; i < valoresPromedio.length; i++) {
                 try {
                     valoresPromedio[i] /= counters[i];
+                    DecimalFormat df2 = new DecimalFormat("#.##");
+                    valoresPromedio[i] = Double.valueOf(df2.format(valoresPromedio[i]));
                     if (counters[i] == 0) {
                         valoresPromedio[i] = null;
                     }
