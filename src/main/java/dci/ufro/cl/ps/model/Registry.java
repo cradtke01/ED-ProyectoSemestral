@@ -1,6 +1,11 @@
 package dci.ufro.cl.ps.model;
 
-public class Registro {
+/**
+ * @author Carlos Radtke
+ * @version 1.0
+ * @since 1.0
+ */
+public class Registry {
 
     private String fecha;
     private String hora;
@@ -10,7 +15,7 @@ public class Registro {
     private Double humedad;
     private Double temperatura;
 
-    public Registro(String fecha, String hora, String sector, Double pm10, Double pm25, Double humedad, Double temperatura) {
+    public Registry(String fecha, String hora, String sector, Double pm10, Double pm25, Double humedad, Double temperatura) {
         this.fecha = fecha;
         this.hora = hora;
         this.sector = sector;

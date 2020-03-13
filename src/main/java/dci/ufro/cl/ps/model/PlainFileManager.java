@@ -1,10 +1,15 @@
-package dci.ufro.cl.ps.services;
+package dci.ufro.cl.ps.model;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileManager {
+/**
+ * @author Carlos Radtke
+ * @version 1.0
+ * @since 1.0
+ */
+public class PlainFileManager {
     /**
      * Reads a plain text file given the files relative path.
      *
@@ -21,7 +26,7 @@ public class FileManager {
     }
 
     /**
-     * Overwrites a plain text file content given the file's relative path and new content.
+     * Writes (or overwrites) a plain text file given the file's relative path and new content.
      *
      * @param filePath
      * @param fileContent

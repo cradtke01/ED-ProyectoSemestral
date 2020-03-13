@@ -3,21 +3,19 @@
 
 <head>
     <title th:text="ContaminacionTemuco"></title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link type="text/css" href="css/index.css" rel="stylesheet"/>
-    <link type="text/xml" href="RegistrosR.csv">
+    <link href="averagedRegistries.csv" type="text/xml">
     <link type="text/plain" href="map.geojson">
     <meta charset="UTF-8">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-
-    <!-- Create an element where the map will take place -->
 </head>
 
 <body>
 <h1>Contaminacion en Temuco</h1>
+
 <hr>
 
 <div class='parent'>
@@ -35,19 +33,25 @@
 <form action="/index">
     <div class='parent'>
         <div class='child inline-block-child'>
-            <input maxlength="2" name="fecha" placeholder="Fecha" size="1" th:value="${fecha}" type="date">
+            <label>
+                <input name="date" size="1" th:value="${date}" type="date">
+            </label>
         </div>
         <div class='child inline-block-child'>
-            <input class="slider" id="horaID" max="23" min="0" name="hora" th:value="${hora}"
-                   type="range"> <span id="horaSeleccionada"></span>:00
+            <label for="timeID"></label><input class="slider" id="timeID" max="23" min="0" name="time"
+                                               th:value="${time}"
+                                               type="range"> <span id="selectedTime"></span>:00
         </div>
         <div class='child inline-block-child'><input type="submit" value="Buscar">
         </div>
     </div>
 </form>
+
 <hr>
 
+<!-- Create an element where the map will take place -->
 <svg height="250" id="my_dataviz" style="background-color: white" width="800"></svg>
+
 <hr>
 <table border="1" cellpadding="1" cellspacing="0" width="800">
     <thead>
@@ -60,18 +64,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="registro : ${listaRegistros}">
-        <td th:text="${registro.getSector()}"></td>
-        <td th:text="${registro.getPm10()}"></td>
-        <td th:text="${registro.getPm25()}"></td>
-        <td th:text="${registro.getHumedad()}"></td>
-        <td th:text="${registro.getTemperatura()}"></td>
+    <tr th:each="registry : ${registryList}">
+        <td th:text="${registry.getSector()}"></td>
+        <td th:text="${registry.getPm10()}"></td>
+        <td th:text="${registry.getPm25()}"></td>
+        <td th:text="${registry.getHumedad()}"></td>
+        <td th:text="${registry.getTemperatura()}"></td>
     </tr>
     </tbody>
 </table>
 
 <script>
 
+    //Draws the map.
     window.onload = function () {
 
 
@@ -96,8 +101,8 @@
         // Load external data and boot
         d3.queue()
             .defer(d3.json, "map.geojson")
-            .defer(d3.csv, "RegistrosR.csv", function (d) {
-                data.set(d.code, +d.pop);
+            .defer(d3.csv, "averagedRegistries.csv", function (d) {
+                data.set(d.sector, +d.pm10);
             })
             .await(ready);
 
@@ -125,8 +130,8 @@
 
 </script>
 <script>
-    var slider = document.getElementById("horaID");
-    var output = document.getElementById("horaSeleccionada");
+    var slider = document.getElementById("timeID");
+    var output = document.getElementById("selectedTime");
     output.innerHTML = (slider.value);
 
     slider.oninput = function () {
